@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import useMutationTodo from '../../hooks/useMutationTodo'
 import { TodoData } from '../../type/todosType'
-import useInput from '../../hooks/useInput'
+import moment from 'moment'
 
 type buttonProps = {
     buttonType?: string,
@@ -17,14 +17,16 @@ type buttonProps = {
 function Button({ buttonType, titleText, contentText, titleHandler, contentHandler, id, isDone }: buttonProps) {
     const { addMutate, updateMutate, deleteMutate } = useMutationTodo();
     type TodoOmitType = Omit<TodoData, 'id'>;
-    type updTodoOmitType = Omit<TodoData, 'title' | 'content'>;
+    type updTodoPickType = Pick<TodoData, 'id' | 'isDone'>;
+    
     const newTodo: TodoOmitType = {
         title: titleText,
         content: contentText,
-        isDone: false
+        isDone: false,
+        createAt: moment().format()
     }
 
-    const updTodo: updTodoOmitType = {
+    const updTodo: updTodoPickType = {
         id,
         isDone
     }

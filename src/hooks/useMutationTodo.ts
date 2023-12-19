@@ -7,19 +7,19 @@ const useMutationTodo = () => {
   const addMutation = useMutation({
     mutationFn: addTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({queryKey: ["todos"]});
     }
   });
   const updateMutation = useMutation({
     mutationFn: updateTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({queryKey: ["todos"]});
     }
   });
   const deleteMutation = useMutation({
     mutationFn: deleteTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries({queryKey: ["todos"]});
     }
   });
 

@@ -3,7 +3,7 @@ import { TodoData } from '../type/todosType';
 
 export const getTodos = async () => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos?_sort=createAt&_order=desc`);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -15,8 +15,8 @@ export const addTodo = async (newTodo: TodoOmitType) => {
   await axios.post(`${process.env.REACT_APP_SERVER_URL}/todos`, newTodo);
 };
 
-type updTodoOmitType = Omit<TodoData, 'title' | 'content'>;
-export const updateTodo = async (updTodo: updTodoOmitType) => {
+type updTodoPickType = Pick<TodoData, 'id' | 'isDone'>;
+export const updateTodo = async (updTodo: updTodoPickType) => {
   await axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${updTodo.id}`, { isDone: !updTodo.isDone });
 };
 
